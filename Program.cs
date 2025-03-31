@@ -12,16 +12,6 @@ using Serilog;
 using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using Microsoft.AspNetCore.Authentication.Cookies;
-/*
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RestaurantBestelApp.Database;
-using RestaurantBestelApp.Services;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using RestaurantBestelApp.Controllers;
-*/
 
 namespace RestaurantBestelApp
 {
