@@ -1,0 +1,33 @@
+﻿@model RestaurantBestelApp.Models.UserLoginModel
+
+@{
+    ViewData["Title"] = "Dashboard TableAssignment";
+}
+
+<form method="post" action="/TableAssignment/Submit">
+    <div>
+        <h6>Medewerker:</h6>
+        <input type="text" id="Employee" name="Employee" value="@ViewData["Employee"]" readonly />
+    </div>
+    <div>
+        <h6>Naam:</h6>
+        <input type="text" id="CustomerName" name="CustomerName" required />
+    </div>
+    <div>
+        <h6>Tafel:</h6>
+        <select id="TableNumber" name="TableNumber" class="dropdown">
+            @for (int i = 1; i <= 10; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+    <!-- Confirm to save edit (SweetAlert) -->
+    <button type="button"
+            class="btn btn-success"
+            id="saveCustomerCheckIn">
+            Opslaan
+    </button>
+</form>
+
+<script src="~/js/confirmation.js"></script>

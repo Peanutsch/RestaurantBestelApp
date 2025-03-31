@@ -1,0 +1,25 @@
+﻿﻿<!-- [Login Form] -->
+<div class="centered-loginform">
+    <div class="loginform-container">
+        <h2 class="text-center">Login</h2>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="alias">Alias</label>
+                <input type="text" id="alias" name="AliasId" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Wachtwoord</label>
+                <div class="input-group">
+                    <input type="password" id="password" name="Password" class="form-control" required>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Inloggen</button>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/auth.js"></script>
