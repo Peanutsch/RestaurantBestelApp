@@ -1,5 +1,48 @@
 ﻿document.addEventListener("DOMContentLoaded", function ()
 {
+    // SweetAlert for CustomerCheckIn Button
+    var saveCustomerCheckInButton = document.getElementById("saveCustomerCheckIn");
+    if (saveCustomerCheckInButton)
+    {
+        saveCustomerCheckInButton.addEventListener("click", function (event)
+        {
+            var customerName = document.getElementById("CustomerName").value;
+            var tableNumber = document.getElementById("TableNumber").value;
+
+            Swal.fire({
+                title: "Bevestigen",
+                html: `Graag Check-in bevestigen<br><br>
+                       <strong>Naam: ${customerName.toUpperCase()}</strong><br>
+                       <strong>Tafel: ${tableNumber}</strong>`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Opslaan",
+                cancelButtonText: "Annuleer"
+            }).then((result) =>
+            {
+                if (result.isConfirmed)
+                {
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "SUCCES!",
+                        html: `<strong>[${customerName.toUpperCase() }]</strong><br>is ingechecked<br>
+                               voor tafel ${tableNumber}!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() =>
+                    {
+                        window.location.href = "/TableAssignment/Submit"
+                        //createUser();
+                    });
+                }
+            });
+        });
+    }
+
     // SweetAlert for Save Edit Button
     var saveEditButton = document.getElementById("saveEditButton");
     if (saveEditButton)
@@ -31,50 +74,7 @@
                         timer: 1500
                     }).then(() =>
                     {
-
-
                         document.querySelector("form").submit();
-                    });
-                }
-            });
-        });
-    }
-
-    // SweetAlert for CustomerCheckIn Button
-    var saveCustomerCheckInButton = document.getElementById("saveCustomerCheckIn");
-    if (saveCustomerCheckInButton)
-    {
-        saveCustomerCheckInButton.addEventListener("click", function (event)
-        {
-            var customerName = document.getElementById("CustomerName").value;
-            var tableNumber = document.getElementById("TableNumber").value;
-
-            Swal.fire({
-                title: "Bevestigen",
-                html: `Graag Check-in bevestigen<br>
-                       <strong>Naam:</strong> ${customerName} <br>
-                       <strong>Tafel:</strong> ${tableNumber}`,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Opslaan",
-                cancelButtonText: "Annuleer"
-            }).then((result) =>
-            {
-                if (result.isConfirmed)
-                {
-                    Swal.fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "success",
-                        title: "SUCCES!",
-                        html: `Klant <strong>[${customerName}]</strong> is ingechecked!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() =>
-                    {
-                        createUser();
                     });
                 }
             });
