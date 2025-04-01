@@ -42,7 +42,7 @@
                 {
                     Swal.fire({
                         toast: true,
-                        position: "top-end",
+                        //position: "top-end",
                         icon: "success",
                         title: "SUCCES!",
                         html: `Login succes!`,

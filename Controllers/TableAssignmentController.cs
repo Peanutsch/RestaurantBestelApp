@@ -20,7 +20,6 @@ namespace RestaurantBestelApp.Controllers
                     if (jsonToken != null)
                     {
                         ViewData["Employee"] = jsonToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value.ToUpper();
-                        //ViewData["Role"] = jsonToken.Claims.FirstOrDefault(c => c.Type == "role")?.Value.ToUpper();
                     }
                     else
                     {
@@ -42,8 +41,8 @@ namespace RestaurantBestelApp.Controllers
         [HttpPost]
         public IActionResult Submit(string Employee, string CustomerName, int TableNumber)
         {
-            // Hier kan je de data opslaan in de database of verwerken
             Debug.WriteLine($"Medewerker: {Employee}, Klant: {CustomerName}, Tafel: {TableNumber}");
+
 
             return RedirectToAction("Index"); // Terug naar de tabel toewijzing pagina
         }

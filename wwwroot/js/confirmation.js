@@ -1,48 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function ()
 {
-    // SweetAlert for CustomerCheckIn Button
-    var saveCustomerCheckInButton = document.getElementById("saveCustomerCheckIn");
-    if (saveCustomerCheckInButton)
-    {
-        saveCustomerCheckInButton.addEventListener("click", function (event)
-        {
-            var customerName = document.getElementById("CustomerName").value;
-            var tableNumber = document.getElementById("TableNumber").value;
-
-            Swal.fire({
-                title: "Bevestigen",
-                html: `Graag Check-in bevestigen<br><br>
-                       <strong>Naam: ${customerName.toUpperCase()}</strong><br>
-                       <strong>Tafel: ${tableNumber}</strong>`,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Opslaan",
-                cancelButtonText: "Annuleer"
-            }).then((result) =>
-            {
-                if (result.isConfirmed)
-                {
-                    Swal.fire({
-                        toast: true,
-                        position: "top-end",
-                        icon: "success",
-                        title: "SUCCES!",
-                        html: `<strong>[${customerName.toUpperCase() }]</strong><br>is ingechecked<br>
-                               voor tafel ${tableNumber}!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() =>
-                    {
-                        window.location.href = "/TableAssignment/Submit"
-                        //createUser();
-                    });
-                }
-            });
-        });
-    }
-
     // SweetAlert for Save Edit Button
     var saveEditButton = document.getElementById("saveEditButton");
     if (saveEditButton)
@@ -123,59 +80,4 @@
             }
         });
     });
-
-    // SweetAlert and handler for LogOut
-    var logoutButton = document.getElementById("LogOutButton");
-    if (logoutButton)
-    {
-        logoutButton.addEventListener("click", function (event)
-        {
-            event.preventDefault();
-
-            Swal.fire({
-                title: "Confirm Exit",
-                html: `Are you sure you want to log out?`,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No"
-            }).then((result) =>
-            {
-                if (result.isConfirmed)
-                {
-                    fetch('/Login/Logout', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                        }
-                    })
-                        .then(response =>
-                        {
-                            if (response.ok)
-                            {
-                                Swal.fire({
-                                    toast: true,
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "SUCCES!",
-                                    html: `User logout succesful!`,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() =>
-                                {
-                                    window.location.href = "/Login/Index";  // Redirect to login
-                                });
-                            } else
-                            {
-                                throw new Error("Logout failed");
-                            }
-                        })
-                        .catch(error => console.error('Logout error:', error));
-                }
-            });
-        });
-    }
 });

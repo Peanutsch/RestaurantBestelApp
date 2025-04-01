@@ -1,0 +1,12 @@
+DISH,TYPE,INFO,PRICE
+Groentesoep,Soup,Vegan,4.50
+Kippensoep,Soup,Kip,4.50
+Rundvleessoep,Soup,Rund,4.50
+Erwtensoep,Soup,Varken,4.50
+Cola,Soft,,3
+Sprite,Soft,,3
+Fanta,Soft,,3
+Bier,Alc,,4.50
+Wijn,Alc,,4.50
+Whisky,Hard,8.50
+Rum,Hard,,8.50
