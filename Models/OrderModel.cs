@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantBestelApp.Models
 {
+    [Keyless]
     public class OrderModel
     {
-        [Key]
-        public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
-        public int TableNumber { get; set; }
+        public required string Date { get; set; }
+        public required string Time { get; set; }
+        public string? TableNumber { get; set; }
         public string? CustomerName { get; set; }
         public string? Order { get; set; }
-
         public string? Status { get; set;  }
     }
 }

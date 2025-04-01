@@ -9,11 +9,11 @@ namespace RestaurantBestelApp.Controllers
 {
     public class OrderSummaryController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly AppDbContext _context;
 
-        public OrderSummaryController(AppDbContext appDbContext)
+        public OrderSummaryController(AppDbContext context)
         {
-            this._appDbContext = appDbContext;
+            this._context = context;
         }
 
         /// <summary>
@@ -26,12 +26,10 @@ namespace RestaurantBestelApp.Controllers
             return View();  // Returns the login page view
         }
 
-        [HttpGet]
+        [HttpPost]
         public void OrderSummary()
         {
-            var Orderdate = DateTime.Now.ToString("dd-MM-yyyy");
-            var Ordertime = DateTime.Now.ToString("HH:mm:ss");
-            var Orderstatus = string.Empty;
+
         }
     }
 }
