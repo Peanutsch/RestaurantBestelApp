@@ -4,12 +4,18 @@
     document.addEventListener("click", function (event)
     {
         if (event.target.classList.contains("btn-success"))
-        { // Controleer of een 'Bestel' knop is aangeklikt
+        {
             var order = event.target.getAttribute("data-order");
+
+            // Splits de data-order string in twee delen
+            var orderData = order.split(',');
+
+            var dish = orderData[0];  // Het gerecht
+            var price = orderData[1]; // De prijs
 
             Swal.fire({
                 title: "Bevestig je bestelling",
-                html: `<strong>[${order.toUpperCase()}]</strong>`,
+                html: `<strong>[${dish.toUpperCase()} €${price}]</strong>`,
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -22,22 +28,22 @@
                 {
                     Swal.fire({
                         toast: true,
-                        //position: "top-end",
                         icon: "success",
                         title: "Uw bestelling is geplaatst!",
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() =>
                     {
-                        console.log(`Bestelling ontvangen:\n${order.toUpperCase()}`);
-                        handleOrder(order);
+                        console.log(`Bestelling ontvangen:\n${dish.toUpperCase()} - €${price}`);
+                        handleOrder(dish, price);
                     });
                 }
             });
         }
     });
 
-    function handleOrder(order)
+
+    function handleOrder(order, price)
     {
         fetch('/SaveOrder/GetLastOrderId') // Haal laatste ORDERID op
             .then(response => response.json())
@@ -50,7 +56,7 @@
                 const isDate = now.toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
                 const customerName = getCookie("CustomerName");
-                const tableNumber = getCookie("TableNumber");
+                const tableNumber = getCookie("TableNumber");               
 
                 const confirmedOrder = {
                     OrderId: newOrderId, // ORDERID uit database
@@ -76,6 +82,11 @@
                     {
                         if (data.success)
                         {
+                            var cookieDate = isDate;
+                            document.cookie = `isDate=${cookieDate}; path=/`; // store date for order summary
+                            document.cookie = `isOrder=${order.toUpperCase() }; path=/`;
+                            document.cookie = `isPrice=${price}; path=/`;
+
                             window.location.href = "/OrderSummary/Index";
                         } else
                         {

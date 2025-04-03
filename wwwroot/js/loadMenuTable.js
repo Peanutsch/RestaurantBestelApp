@@ -27,7 +27,7 @@ function displayMenu(menu)
                 <button type="button"
                         class="btn btn-success"
                         id="saveOrder"
-                        data-order="${Dbmenu.dish}">
+                        data-order="${Dbmenu.dish},${Dbmenu.price}">
                         Bestel
                 </button>
             </td>

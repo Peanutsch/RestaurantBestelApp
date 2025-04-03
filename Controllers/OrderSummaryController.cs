@@ -26,7 +26,7 @@ namespace RestaurantBestelApp.Controllers
             return View();  // Returns the login page view
         }
 
-        [HttpPost]
+        [HttpGet]
         public void OrderSummary()
         {
 
