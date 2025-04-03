@@ -5,6 +5,7 @@ using RestaurantBestelApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace RestaurantBestelApp.Controllers
 {
@@ -36,7 +37,6 @@ namespace RestaurantBestelApp.Controllers
         }
 
 
-
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> SaveOrder([FromBody] OrderModel confirmedOrder)
@@ -58,29 +58,12 @@ namespace RestaurantBestelApp.Controllers
 
             await AddOrderToDatabase(confirmedOrder);
 
-            Debug.WriteLine($"Confirmed Order:");
-            Debug.WriteLine($"OrderId: ${confirmedOrder.OrderId}");
-            Debug.WriteLine($"Date: ${confirmedOrder.Date}");
-            Debug.WriteLine($"Time: ${confirmedOrder.Time}");
-            Debug.WriteLine($"Table: ${confirmedOrder.TableNumber}");
-            Debug.WriteLine($"Name: ${confirmedOrder.CustomerName}");
-            Debug.WriteLine($"Order: ${confirmedOrder.Order}");
-            Debug.WriteLine($"Status: ${confirmedOrder.Status}");
-
-
-            Debug.WriteLine($"\n[NOTIFICATION] Calling AddOrderToDataBase, param: {confirmedOrder}\n");
-
-
-
             return Ok(new { success = true, message = "Order succesful saved" });
-
         }
 
         public async Task AddOrderToDatabase(OrderModel confirmedOrder)
         {
-            Debug.WriteLine($"\n[NOTIFICATION] Running SaveOrderController/AddOrderToDatabase, param: {confirmedOrder}");
-            Debug.WriteLine("[RUNNING] _context.DbOrder.Add(confirmedOrder);");
-            Debug.WriteLine("[RUNNING] await _context.SaveChangesAsync();\n");
+            Debug.WriteLine($"\n[NOTIFICATION] Running SaveOrderController/AddOrderToDatabase\n{JsonConvert.SerializeObject(confirmedOrder)}\n");
             _context.DbOrders.Add(confirmedOrder);
             await _context.SaveChangesAsync();
         }

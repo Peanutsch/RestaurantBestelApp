@@ -61,8 +61,6 @@
                     Order: order.toUpperCase(),
                     Status: `IN BEHANDELING`
                 };
-
-                console.log(`[confirmedOrder]\nOrderId: ${confirmedOrder.OrderId} Date: ${confirmedOrder.Date} Time: ${confirmedOrder.Time} TableNumber: ${confirmedOrder.TableNumber} CustomerName: ${confirmedOrder.CustomerName} Order: ${confirmedOrder.Order} Status: ${confirmedOrder.Status}`);
                 console.log("JSON Payload:", JSON.stringify(confirmedOrder));
                 fetch('/SaveOrder/SaveOrder', {
                     method: 'POST',
