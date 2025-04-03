@@ -14,6 +14,6 @@
         return "";
     }
 
-    document.getElementById("Customer").value = getCookie("CustomerName");
-    document.getElementById("TableNumber").value = getCookie("TableNumber");
+    //document.getElementById("Customer").value = getCookie("CustomerName");
+    //document.getElementById("TableNumber").value = getCookie("TableNumber");
 });

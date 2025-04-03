@@ -39,6 +39,62 @@
 
     function handleOrder(order)
     {
+        fetch('/SaveOrder/GetLastOrderId') // Haal laatste ORDERID op
+            .then(response => response.json())
+            .then(data =>
+            {
+                const newOrderId = data.orderId; // Nieuwe ORDERID
+
+                const now = new Date();
+                const isTime = now.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                const isDate = now.toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+                const customerName = getCookie("CustomerName");
+                const tableNumber = getCookie("TableNumber");
+
+                const confirmedOrder = {
+                    OrderId: newOrderId, // ORDERID uit database
+                    Date: isDate,
+                    Time: isTime,
+                    TableNumber: tableNumber.trim().toUpperCase(),
+                    CustomerName: customerName.trim().toUpperCase(),
+                    Order: order.toUpperCase(),
+                    Status: `IN BEHANDELING`
+                };
+
+                console.log(`[confirmedOrder]\nOrderId: ${confirmedOrder.OrderId} Date: ${confirmedOrder.Date} Time: ${confirmedOrder.Time} TableNumber: ${confirmedOrder.TableNumber} CustomerName: ${confirmedOrder.CustomerName} Order: ${confirmedOrder.Order} Status: ${confirmedOrder.Status}`);
+                console.log("JSON Payload:", JSON.stringify(confirmedOrder));
+                fetch('/SaveOrder/SaveOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${getCookie('AuthToken')}`
+                    },
+                    body: JSON.stringify(confirmedOrder),
+                    credentials: "include"
+                })
+                    .then(response => response.json())
+                    .then(data =>
+                    {
+                        if (data.success)
+                        {
+                            window.location.href = "/OrderSummary/Index";
+                        } else
+                        {
+                            alert(`[ERROR] SaveOrder script Error: ${data.message}`);
+                            //window.location.href = "/OrderSummary/Index";
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+            })
+            .catch(error => console.error("Error fetching OrderId:", error));
+    }
+
+
+
+    /*
+    function handleOrder(order)
+    {
         const now = new Date();
         const isTime = now.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         const isDate = now.toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -47,24 +103,25 @@
         const tableNumber = getCookie("TableNumber");
 
         const confirmedOrder = {
+            orderId: isOrderId,
             Date: isDate,
             Time: isTime,
-            TableNumber: tableNumber,
-            CustomerName: customerName,
-            Order: order,
-            Status: `In Behandeling`
+            TableNumber: tableNumber.trim().toUpperCase(),
+            CustomerName: customerName.trim().toUpperCase(),
+            Order: order.toUpperCase(),
+            Status: `IN BEHANDELING`
         };
 
-        console.log(`[confirmedOrder]\nDate: ${confirmedOrder.Date} Time: ${confirmedOrder.Time} TableNumber: ${confirmedOrder.TableNumber} CustomerName: ${confirmedOrder.CustomerName.toUpperCase()} Order: ${confirmedOrder.Order} Status: ${confirmedOrder.Status}`)
+        console.log(`[confirmedOrder]\nOrderId: ${confirmedOrder.orderId} Date: ${confirmedOrder.Date} Time: ${confirmedOrder.Time} TableNumber: ${confirmedOrder.TableNumber} CustomerName: ${confirmedOrder.CustomerName.toUpperCase()} Order: ${confirmedOrder.Order} Status: ${confirmedOrder.Status}`)
 
-        fetch('/SaveOrderController/SaveOrder', {
+        fetch('/SaveOrder/SaveOrder', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                //'Authorization': `Bearer ${getCookie('AuthToken')}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('AuthToken')}`
             },
             body: JSON.stringify(confirmedOrder),
-            //credentials: "include"
+            credentials: "include"
         })
             .then(response =>
             {
@@ -79,12 +136,14 @@
                     window.location.href = "/OrderSummary/Index";
                 } else
                 {
-                    alert(`SaveOrder script Error: ${data.message}`);
-                    console.error("Validation Errors:", data.errors);
+                    alert(`[ERROR] SaveOrder script Error: ${data.message}`);
+                    window.location.href = "/OrderSummary/Index";
+                    //console.error("Validation Errors:", data.errors);
                 }
             })
             .catch(error => console.error("Error:", error));
     }
+    */
 
     function getCookie(name)
     {

@@ -8,6 +8,6 @@ namespace RestaurantBestelApp.Database
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<UserLoginModel> Users { get; set; }
         public DbSet<MenuModel> Dbmenu { get; set; }
-        public DbSet<OrderModel> DbOrder { get; set; }
+        public DbSet<OrderModel> DbOrders { get; set; }
     }
 }

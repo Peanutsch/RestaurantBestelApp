@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantBestelApp.Models
 {
-    [Keyless]
     public class OrderModel
     {
+        [Key]
+        public int OrderId { get; set; }
         public required string Date { get; set; }
         public required string Time { get; set; }
         public string? TableNumber { get; set; }
