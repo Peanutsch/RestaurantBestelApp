@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using RestaurantBestelApp.Database;
 using RestaurantBestelApp.Models;
 
 namespace RestaurantBestelApp.Controllers
-
 {
     public class OrderSummaryController : Controller
     {
@@ -16,20 +14,37 @@ namespace RestaurantBestelApp.Controllers
             this._context = context;
         }
 
-        /// <summary>
-        /// Displays the login page view.
-        /// </summary>
-        /// <returns>The login view (Index view).</returns>
-        //[HttpGet]
         public IActionResult Index()
         {
-            return View();  // Returns the login page view
+            var CustomerName = Request.Cookies["CustomerName"];
+            var OrderId = Request.Cookies["isOrderId"];
+            var TableNumber = Request.Cookies["TableNumber"];
+
+            ViewData["CustomerName"] = CustomerName?.ToUpper();
+            ViewData["OrderId"] = OrderId;
+            ViewData["TableNumber"] = TableNumber;
+
+            return View();  // bereikbaar via: /OrderSummary
         }
 
         [HttpGet]
-        public void OrderSummary()
+        public async Task<IActionResult> SummaryOrderItems()
         {
+            var order = await _context.DbOrders
+                .Select(u => new OrderModel
+                {
+                    OrderId = u.OrderId,
+                    Date = u.Date,
+                    Time = u.Time,
+                    TableNumber = u.TableNumber,
+                    CustomerName = u.CustomerName,
+                    Order = u.Order,
+                    Status = u.Status,
+                    Price = u.Price
+                })
+                .ToListAsync();
 
+            return Ok(order); // bereikbaar via: /OrderSummary/SummaryOrderItems
         }
     }
 }

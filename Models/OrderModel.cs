@@ -13,5 +13,6 @@ namespace RestaurantBestelApp.Models
         public string? CustomerName { get; set; }
         public string? Order { get; set; }
         public string? Status { get; set;  }
+        public decimal? Price { get; set; }
     }
 }

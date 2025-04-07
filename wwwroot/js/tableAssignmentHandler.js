@@ -41,7 +41,7 @@
                         //position: "top-end",
                         icon: "success",
                         title: "SUCCES!",
-                        html: `<strong>[${customerName.toUpperCase()}]</strong><br>is ingecheckt<br>
+                        html: `<strong>[${customerName.toUpperCase()}]</strong><br>wordt ingecheckt<br>
                                voor tafel ${tableNumber}!`,
                         showConfirmButton: false,
                         timer: 1500
