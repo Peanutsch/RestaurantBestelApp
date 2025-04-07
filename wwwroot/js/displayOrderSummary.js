@@ -20,7 +20,8 @@ function getCookieData()
         orderDate: getCookie("isDate"),
         orderTime: getCookie("isTime"),
         orderPrice: rawPrice ? parseFloat(rawPrice).toFixed(2) : "0.00",
-        customerName: getCookie("CustomerName")
+        customerName: getCookie("CustomerName"),
+        orderStatus: getCookie("isStatus")
     };
 }
 
@@ -63,13 +64,7 @@ function displayOrderSummary(confirmedOrders)
             <td class="table-cell">${cookieData.orderTime}</td>
             <td class="table-cell">${order.order}</td>
             <td class="table-cell">${cookieData.orderPrice ?? 'Onbekend'}</td>
-            <td>
-                <button type="button"
-                        class="btn btn-success"
-                        id="saveOrderbtn">
-                        GeefDezeButtonEenFunctie
-                </button>
-            </td>
+            <td class="table-cell">${cookieData.orderStatus};
         </tr>
     `).join("");
 
@@ -78,10 +73,10 @@ function displayOrderSummary(confirmedOrders)
 
     // Voeg de totaalsom toe als extra rij onderaan de tabel
     tableDisplayTotalPrice.innerHTML = `
+        <br>
         <tr>
             <td colspan="4" class="table-cell">Totaal</td>
-            <td class="table-cell">${totalPrice.toFixed(2)} EUR</td>
-            <td></td>
+            <td class="table-cell" style="background-color: blue">${totalPrice.toFixed(2)} EUR</td>
         </tr>
     `;
 }

@@ -87,12 +87,14 @@
                             var cookieDate = isDate;
                             var cookieTime = isTime;
                             var cookiePrice = price;
+                            var cookieStatus = 'IN BEHANDELING';
                             
                             document.cookie = `isOrderId=${cookieOrderId}; path=/`;
                             document.cookie = `isDate=${cookieDate}; path=/`; // store date for order summary
                             document.cookie = `isTime = ${ cookieTime }; path=/`;
                             document.cookie = `isOrder=${order.toUpperCase()}; path=/`;
                             document.cookie = `isPrice=${cookiePrice}; path=/`;
+                            document.cookie = `isStatus=${cookieStatus}; path=/`;
 
                             window.location.href = "/OrderSummary/Index";
                         } else

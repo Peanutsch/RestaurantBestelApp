@@ -30,7 +30,7 @@ namespace RestaurantBestelApp.Controllers
         [HttpGet]
         public async Task<IActionResult> SummaryOrderItems()
         {
-            var order = await _context.DbOrders
+            var confirmedOrder = await _context.DbOrders
                 .Select(u => new OrderModel
                 {
                     OrderId = u.OrderId,
@@ -44,7 +44,7 @@ namespace RestaurantBestelApp.Controllers
                 })
                 .ToListAsync();
 
-            return Ok(order); // bereikbaar via: /OrderSummary/SummaryOrderItems
+            return Ok(confirmedOrder); // bereikbaar via: /OrderSummary/SummaryOrderItems
         }
     }
 }
