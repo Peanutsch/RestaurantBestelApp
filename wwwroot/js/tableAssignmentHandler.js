@@ -8,6 +8,7 @@
         {
             var customerName = document.getElementById("CustomerName").value.trim();
             var tableNumber = document.getElementById("TableNumber").value;
+            var employee = document.getElementById("Employee").value;
 
             if (!customerName)
             {
@@ -35,6 +36,7 @@
                 {
                     document.cookie = `CustomerName=${encodeURIComponent(customerName)}; path=/`;
                     document.cookie = `TableNumber=${tableNumber}; path=/`;
+                    document.cookie = `Employee=${employee}; path=/`;
 
                     Swal.fire({
                         toast: true,

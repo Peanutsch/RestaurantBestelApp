@@ -2,13 +2,12 @@
     ViewData["Title"] = "Order Summary";
 }
 
-<h1>Besteloverzicht @ViewData["CustomerName"], Tafel: @ViewData["TableNumber"], OrderId: @ViewData["OrderId"]</h1>
+<div id="orderHeader"></div>
 
 <div>
     <table class="table table-bordered" id="orderSummary">
         <thead class="table-light">
             <tr>
-                <th>Order</th>
                 <th>Datum</th>
                 <th>Tijd</th>
                 <th>Bestelling</th>

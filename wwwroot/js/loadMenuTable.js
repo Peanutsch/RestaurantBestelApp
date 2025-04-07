@@ -13,23 +13,19 @@
 
 function displayMenu(menu)
 {
-    const tableBody = document.getElementById("userTableBody");
-    if (!tableBody) return; // Exit if table body is not found
+    const menuTableBody = document.getElementById("userTableBody");
+
+    if (!menuTableBody) return; // Exit if table body is not found
 
     // Generate the table rows in one operation and insert them into the DOM
-    tableBody.innerHTML = menu.map(Dbmenu => `
+    menuTableBody.innerHTML = menu.map(Dbmenu => `
         <tr>
             <td class="table-cell">${Dbmenu.dish}</td>
             <td class="table-cell">${Dbmenu.type}</td>
             <td class="table-cell">${Dbmenu.info}</td>
             <td class="table-cell">${Dbmenu.price.toFixed(2)}</td>
-            <td>
-                <button type="button"
-                        class="btn btn-success"
-                        id="saveOrder"
-                        data-order="${Dbmenu.dish},${Dbmenu.price}">
-                        Bestel
-                </button>
+            <td class="table-cell">
+                <input type="number" id="itemvalue" name="quantity" min="0" style="width: 80px" class="form-control">
             </td>
         </tr>
     `).join("");

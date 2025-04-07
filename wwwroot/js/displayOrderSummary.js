@@ -21,7 +21,9 @@ function getCookieData()
         orderTime: getCookie("isTime"),
         orderPrice: rawPrice ? parseFloat(rawPrice).toFixed(2) : "0.00",
         customerName: getCookie("CustomerName"),
-        orderStatus: getCookie("isStatus")
+        orderStatus: getCookie("isStatus"),
+        orderTableNumber: getCookie("TableNumber"),
+        employee: getCookie("Employee")
     };
 }
 
@@ -42,12 +44,13 @@ function displayOrderSummary(confirmedOrders)
 {
     const cookieData = getCookieData();
     console.log("Klant orderId:", cookieData.orderId);
+    console.log("Medewerker:", cookieData.employee);
 
-    // Filter de bestellingen op basis van de huidige orderId uit de cookies
+    // Filter bestellingen op basis van orderId
     const filteredOrders = confirmedOrders.filter(order => order.orderId.toString() === cookieData.orderId);
     console.log("Matched order with orderId:", filteredOrders);
 
-    // Bereken het totaal voor de gefilterde bestellingen
+    // Bereken het totaalbedrag
     const totalPrice = filteredOrders.reduce((total, order) => total + parseFloat(cookieData.orderPrice), 0);
 
     // Haal de tbody elementen op
@@ -56,27 +59,38 @@ function displayOrderSummary(confirmedOrders)
 
     if (!tableCurrentOrder || !tableDisplayTotalPrice) return;
 
-    // Maak de HTML voor de bestellingen
+    // Toon order info als header
+    const orderHeader = document.getElementById("orderHeader");
+    if (orderHeader)
+    {
+        orderHeader.innerHTML = `
+            <h1>Besteloverzicht ${cookieData.customerName.toLocaleUpperCase()}</h1>
+            <h4>OrderID: #${cookieData.orderId}</h4>
+            <h4>Tafel: #${cookieData.orderTableNumber}</h4>
+            <br>
+            <p>Medewerker: ${cookieData.employee}<br>
+               ${cookieData.orderDate} - ${cookieData.orderTime}</p>
+            <p></p>
+        `;
+    }
+
+    // Bouw de HTML
     let rows = filteredOrders.map(order => `
         <tr>
-            <td class="table-cell">${cookieData.orderId}</td>
             <td class="table-cell">${cookieData.orderDate}</td>
             <td class="table-cell">${cookieData.orderTime}</td>
             <td class="table-cell">${order.order}</td>
-            <td class="table-cell">${cookieData.orderPrice ?? 'Onbekend'}</td>
-            <td class="table-cell">${cookieData.orderStatus};
+            <td class="table-cell">${cookieData.orderPrice ?? '10000000000000000000'}</td>
+            <td class="table-cell">${cookieData.orderStatus}</td>
         </tr>
     `).join("");
 
-    // Voeg de rijen toe voor de bestellingen
     tableCurrentOrder.innerHTML = rows;
 
-    // Voeg de totaalsom toe als extra rij onderaan de tabel
     tableDisplayTotalPrice.innerHTML = `
-        <br>
         <tr>
-            <td colspan="4" class="table-cell">Totaal</td>
-            <td class="table-cell" style="background-color: blue">${totalPrice.toFixed(2)} EUR</td>
+            <td colspan="3" class="table-cell"><strong>Totaal</strong></td>
+            <td class="table-cell" style="background-color: blue; color: white;"><strong>€${totalPrice.toFixed(2)}</strong></td>
         </tr>
     `;
 }
