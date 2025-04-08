@@ -65,12 +65,9 @@ function displayOrderSummary(confirmedOrders)
     {
         orderHeader.innerHTML = `
             <h1>Besteloverzicht ${cookieData.customerName.toLocaleUpperCase()}</h1>
-            <h4>OrderID: #${cookieData.orderId}</h4>
-            <h4>Tafel: #${cookieData.orderTableNumber}</h4>
-            <br>
+            <h4>Tafel: #${cookieData.orderTableNumber} <span style="margin-left: 80px;">OrderID: #${cookieData.orderId}</span></h4>
             <p>Medewerker: ${cookieData.employee}<br>
                ${cookieData.orderDate} - ${cookieData.orderTime}</p>
-            <p></p>
         `;
     }
 

@@ -1,20 +1,24 @@
 ﻿
+<div id="orderHeader"></div>
+
 <a asp-controller="DisplayMenu" asp-action="Index" class="btn btn-danger" id="returntodisplaymenu">Terug naar Menu</a>
+<p></p>
 
-<table id="orderhistorytable">
-    <thead>
-        <tr>
-            <th>Datum</th>
-            <th>Tijd</th>
-            <th>Besteling</th>
-            <th>Prijs</th>
-        </tr>
-    </thead>
-    <tbody id="tableCurrentOrder">
-        <!-- Display order history customer -->
-    </tbody>
-</table>
-
+<div class="table-cell">
+    <table class="table table-bordered" id="orderhistorytable">
+        <thead class="table-light">
+            <tr>
+                <th>Datum</th>
+                <th>Tijd</th>
+                <th>Besteling</th>
+                <th>Prijs</th>
+            </tr>
+        </thead>
+        <tbody id="tableCurrentOrder">
+            <!-- Display order history customer -->
+        </tbody>
+    </table>
+</div>
 <a asp-controller="DisplayMenu" asp-action="Index" class="btn btn-danger" id="returntodisplaymenu">Terug naar Menu</a>
 
 <script src="~/js/displayOrderHistory.js"></script>
