@@ -28,7 +28,7 @@
 
             // Bouw de HTML voor de bevestigingslijst
             const orderSummaryHTML = selectedItems
-                .map(item => `<div>${item.dish.toUpperCase()} (${item.quantity}x) €${(item.price * item.quantity).toFixed(2)}</div>`)
+                .map(item => `<div>${item.quantity}x ${item.dish.toUpperCase()} €${(item.price * item.quantity).toFixed(2)}</div>`)
                 .join("");
 
             // Bereken totaalprijs
@@ -73,7 +73,7 @@
     {
         items.forEach(item =>
         {
-            const orderString = `${item.dish} x${item.quantity}`;
+            const orderString = `${item.quantity}x ${item.dish}`;
             handleOrder(orderString, (item.price * item.quantity).toFixed(2));
         });
     }
