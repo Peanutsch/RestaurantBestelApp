@@ -91,6 +91,24 @@ function displayOrderSummary(confirmedOrders)
         <tr>
             <td colspan="3" class="table-cell"><strong>Totaal</strong></td>
             <td class="table-cell" style="background-color: blue; color: white;"><strong>€${totalPrice.toFixed(2)}</strong></td>
+            <td>
+                <button 
+                    type="button" class="btn btn-success"
+                    id="BackToMenu">Terug naar Menu
+                </button>
+            </td>
         </tr>
     `;
+
+    BackToMenuHandler(filteredOrders);
+}
+
+function BackToMenuHandler(filteredOrders)
+{
+    const allCompleted = filteredOrders.every(order => order.orderStatus === "Afgehandeld");
+    const backToMenuButton = document.getElementById("BackToMenu");
+    if (!allCompleted)
+    {
+        //backToMenuButton.disabled = true;
+    }
 }

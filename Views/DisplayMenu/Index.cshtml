@@ -2,9 +2,11 @@
     ViewData["Title"] = "Display Menu";
 }
 
-<p>
-<h1>Klantnaam: @ViewData["Customer"]<br>Tafel: @ViewData["TableNumber"]</h1>
-</p>
+    <h1>Naam: @ViewData["Customer"]</h1>
+    <p>Tafel: @ViewData["TableNumber"]<br />
+       Medewerker: @ViewData["Employee"]</p>
+
+<a asp-controller="OrderHistory" asp-action="Index" class="btn btn-danger" id="OrderHistory">Overzicht Bestellingen</a>
 
 <form method="post">
     <div class="mt-4">
@@ -50,4 +52,3 @@
 <script src="~/js/menuFilter.js"></script>
 <script src="~/js/loadMenuTable.js"></script>
 <script src="~/js/saveOrderHandler.js"></script>
-<script src="~/js/addToCart.js"></script>

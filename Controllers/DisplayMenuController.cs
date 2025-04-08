@@ -18,9 +18,11 @@ namespace RestaurantBestelApp.Controllers
         {
             var customerName = Request.Cookies["CustomerName"];
             var tableNumber = Request.Cookies["TableNumber"];
+            var employee = Request.Cookies["Employee"];
 
             ViewData["Customer"] = customerName?.ToUpper();
             ViewData["TableNumber"] = tableNumber;
+            ViewData["Employee"] = employee;
 
             return View();
         }
