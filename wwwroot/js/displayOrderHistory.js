@@ -21,7 +21,7 @@ function displayOrderHistory(orderHistory)
 
     console.log("Vandaag:", today);
 
-    const todaysOrders = getTodaysOrders(orderHistory, today, customerName).reverse(); // Filter bestellingen van vandaag voor de klant
+    const todaysOrders = getTodaysOrders(orderHistory, today, customerName).reverse(); // Filter bestellingen van vandaag
     console.log("Bestellingen van vandaag voor de klant:", todaysOrders);
 
     // Haal het element voor het weergeven van de bestellingen op

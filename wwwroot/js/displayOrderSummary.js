@@ -96,16 +96,4 @@ function displayOrderSummary(confirmedOrders)
             </td>
         </tr>
     `;
-
-    BackToMenuHandler(filteredOrders);
-}
-
-function BackToMenuHandler(filteredOrders)
-{
-    const allCompleted = filteredOrders.every(order => order.orderStatus === "Afgehandeld");
-    const backToMenuButton = document.getElementById("BackToMenu");
-    if (!allCompleted)
-    {
-        //backToMenuButton.disabled = true;
-    }
 }
